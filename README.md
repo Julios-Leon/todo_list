@@ -1,54 +1,62 @@
-# React + TypeScript + Vite
+# Todo List App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Proyecto de aprendizaje con React y TypeScript
 
-Currently, two official plugins are available:
+Este es un proyecto simple de una lista de tareas (Todo List) que desarrollé para aprender y practicar React junto con TypeScript. Aunque es una aplicación básica, me ha permitido familiarizarme con conceptos fundamentales y ha sido muy divertido de construir.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologías utilizadas
 
-## Expanding the ESLint configuration
+- React 19
+- TypeScript
+- Tailwind CSS
+- Vite
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Características
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Añadir tareas con título y descripción
+- Marcar tareas como completadas
+- Eliminar tareas
+- Interfaz responsiva con Tailwind CSS
+- Vista de tarjetas para cada tarea
+
+## Aprendizaje
+
+Este proyecto me ha permitido dominar mejor el hook `useState` de React, que es fundamental para manejar el estado de la aplicación. Específicamente, he aprendido a:
+
+- Crear y actualizar estados con arrays de objetos
+- Modificar elementos específicos del estado sin mutar el estado original
+- Pasar funciones como props entre componentes
+- Implementar patrones para añadir/eliminar/actualizar items en una lista
+
+```tsx
+// Ejemplo de cómo utilicé useState para gestionar las tareas
+const [tasks, setTasks] = useState<Task[]>([])
+
+function completeTask(id: number) {
+  const updatedTasks = tasks.map((task) => {
+    if(task.id === id) {
+      return {...task, status: "Done"}
+    } else {
+      return task
+    }
+  })
+  setTasks(updatedTasks)
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Ejecución del proyecto
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Instalar dependencias
+npm install
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+# Iniciar servidor de desarrollo
+npm run dev
+
+# Compilar para producción
+npm run build
 ```
+
+Aunque es una aplicación sencilla, me ha servido como excelente punto de partida para entender mejor cómo React maneja el estado y cómo TypeScript proporciona tipado estático para hacer el código más robusto y mantenible.
+
+¡Me lo he pasado muy bien construyendo este proyecto y estoy emocionado por seguir aprendiendo y desarrollando aplicaciones más complejas!
